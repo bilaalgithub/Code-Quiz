@@ -10,6 +10,8 @@ var startBtn = document.querySelector("#start");
 var initialsEl = document.querySelector("#initials");
 var feedbackEl = document.querySelector("#feedback");
 
+let sfxRight = new Audio("assets/sfx/correct.wav");
+let sfxWrong = new Audio("assets/sfx/incorrect.wav");
 // quiz state variables//
 var currentQuestionIndex = 0;
 var time = questions.length * 15;
@@ -69,14 +71,16 @@ if (this.value !== questions[currentQuestionIndex].answer) {
 time -= 15;
 
 if (time < 0) {
- time = 0;
+time = 0;
 }
  // display new time on page //
+ sfxWrong.play();
 timerEl.textContent = time;
 feedbackEl.textContent = "Wrong!";
 feedbackEl.style.color = "red";
 feedbackEl.style.fontSize = "400%";
 } else {
+    sfxRight.play();
 feedbackEl.textContent = "Correct!";
 feedbackEl.style.color = "green";
 feedbackEl.style.fontSize = "400%";
@@ -125,10 +129,7 @@ if (time <= 0) {
 quizEnd();
 }
 }
-if (djk <=0) {
-    knk
 
-}
 function saveHighscore() {
 // get value of input box //
 var initials = initialsEl.value.trim();
@@ -156,7 +157,7 @@ window.location.href = "score.html";
 function checkForEnter(event) {
 // "13" represents the enter key //
 if (event.key === "Enter") {
- saveHighscore();
+saveHighscore();
 }
 }
 
